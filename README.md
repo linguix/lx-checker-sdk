@@ -15,9 +15,9 @@ Linguix Checker SDK provides grammar and spell checking functionality for web ap
 
 ## Documentation
 
-- [Getting Started](docs/getting-started.md) - Basic setup and usage guide
-- [API Reference](docs/api-reference.md) - Detailed method and interface reference
-- [Styling Guide](docs/styling.md) - Customization options for UI components
+- [Getting Started](getting-started.md) - Basic setup and usage guide
+- [API Reference](api-reference.md) - Detailed method and interface reference
+- [Styling Guide](styling.md) - Customization options for UI components
 
 ## Quick Start
 
