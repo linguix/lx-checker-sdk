@@ -20,6 +20,8 @@ import { LinguixCheckerSDK } from '@linguix.com/lx-checker-sdk';
 LinguixCheckerSDK.initialize('your-api-key');
 ```
 
+> **Security Note:** For production applications, consider using a proxy server to keep your API key secure. See the [Proxy Server Guide](proxy-server.md) for details.
+
 ### Connecting Elements
 
 #### Option 1: JavaScript API
