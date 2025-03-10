@@ -81,6 +81,31 @@ const messenger = new YourBackgroundMessenger();
 LinguixCheckerSDK.initialize('your-api-key', messenger);
 ```
 
+### Service Worker Environment
+
+For background scripts running in a service worker environment (like browser extensions' background scripts) where browser APIs may not be available, use the worker-specific import:
+
+```javascript
+import { LinguixCheckerSDK } from '@linguix.com/lx-checker-sdk/worker';
+import { YourBackgroundMessenger } from './your-messenger';
+
+// Initialize background component in service worker
+const messenger = new YourBackgroundMessenger();
+LinguixCheckerSDK.initialize('your-api-key', messenger);
+
+// Or with custom configuration for proxy server
+LinguixCheckerSDK.initializeWithConfig({
+    url: 'http://your-proxy-server.com:3000',
+    options: {
+        query: {
+            clientToken: 'some-token'
+        }
+    }
+}, messenger);
+```
+
+The worker import is a drop-in replacement that provides the same API but is optimized for environments without browser DOM APIs.
+
 ### Content Component Setup
 
 ```javascript

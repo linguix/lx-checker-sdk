@@ -100,6 +100,42 @@ interface ILinguixBackgroundMessenger {
 
 The SDK uses WebSockets for communication with Linguix grammar checking services. If you need HTTP transport instead, please contact us at hi@linguix.com.
 
+## Service Worker Support
+
+For background scripts running in service worker environments (like browser extensions' background scripts) where browser DOM APIs are not available, the SDK provides a specialized worker import:
+
+```javascript
+import { LinguixCheckerSDK } from '@textly/lx-checker-sdk/worker';
+```
+
+This is a drop-in replacement for the standard import that provides the same API but is optimized for environments without browser DOM APIs. When using this import:
+
+1. The messenger parameter is required when initializing the SDK
+2. The messenger must implement the `ILinguixBackgroundMessenger` interface
+3. Only background component functionality is available (no UI components)
+
+Example usage:
+
+```javascript
+import { LinguixCheckerSDK } from '@textly/lx-checker-sdk/worker';
+
+// A messenger implementation is required in worker environments
+const messenger = new YourBackgroundMessenger();
+
+// Initialize with API key
+LinguixCheckerSDK.initialize('your-api-key', messenger);
+
+// Or with custom configuration
+LinguixCheckerSDK.initializeWithConfig({
+    url: 'http://your-proxy-server.com:3000',
+    options: {
+        query: {
+            clientToken: 'some-token'
+        }
+    }
+}, messenger);
+```
+
 ## Proxy Server
 
 For production applications, you may want to use a proxy server to keep your API key secure. See the [Proxy Server Guide](proxy-server.md) for implementation details.
@@ -115,5 +151,6 @@ LinguixCheckerSDK.initializeWithConfig(
                 clientToken: 'some-token'
             }
         }
-    });
+    }
+);
 ```
