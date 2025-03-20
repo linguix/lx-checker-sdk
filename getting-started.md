@@ -17,10 +17,24 @@ npm install @linguix.com/lx-checker-sdk
 import { LinguixCheckerSDK } from '@linguix.com/lx-checker-sdk';
 
 // Initialize with your API key
-LinguixCheckerSDK.initialize('your-api-key');
+LinguixCheckerSDK.initialize({ apiKey: 'your-api-key' });
+
+// Or initialize with custom configuration
+LinguixCheckerSDK.initialize({
+  apiKey: 'your-api-key',
+  url: 'https://your-custom-api-endpoint.com',
+  options: {
+    query: {
+      clientToken: 'optional-client-token'
+    }
+  },
+  language: 'en-US' // Force specific language instead of automatic detection
+});
 ```
 
 > **Security Note:** For production applications, consider using a proxy server to keep your API key secure. See the [Proxy Server Guide](proxy-server.md) for details.
+
+> **Language Support:** By default, Linguix automatically detects the language of the text being checked, supporting 30+ most popular languages. If you need to force a specific language, you can use the `language` option, but note that manual language forcing is limited to: 'en-US', 'en-GB', 'en-ZA', 'en-CA', 'en-AU', 'en-NZ', 'pt-PT', 'pt-BR', 'de-DE', 'fr', 'pl-PL', 'es', 'it'.
 
 ### Connecting Elements
 
@@ -78,7 +92,7 @@ import { YourBackgroundMessenger } from './your-messenger';
 
 // Initialize background component
 const messenger = new YourBackgroundMessenger();
-LinguixCheckerSDK.initialize('your-api-key', messenger);
+LinguixCheckerSDK.initialize({ apiKey: 'your-api-key' }, messenger);
 ```
 
 ### Service Worker Environment
@@ -91,16 +105,16 @@ import { YourBackgroundMessenger } from './your-messenger';
 
 // Initialize background component in service worker
 const messenger = new YourBackgroundMessenger();
-LinguixCheckerSDK.initialize('your-api-key', messenger);
+LinguixCheckerSDK.initialize({ apiKey: 'your-api-key' }, messenger);
 
 // Or with custom configuration for proxy server
-LinguixCheckerSDK.initializeWithConfig({
-    url: 'http://your-proxy-server.com:3000',
-    options: {
-        query: {
-            clientToken: 'some-token'
-        }
+LinguixCheckerSDK.initialize({
+  url: 'http://your-proxy-server.com:3000',
+  options: {
+    query: {
+      clientToken: 'some-token'
     }
+  }
 }, messenger);
 ```
 
@@ -114,7 +128,7 @@ import { YourContentMessenger } from './your-messenger';
 
 // Initialize content component
 const messenger = new YourContentMessenger();
-LinguixCheckerSDK.initialize('your-api-key', messenger);
+LinguixCheckerSDK.initialize({ apiKey: 'your-api-key' }, messenger);
 
 // Attach to elements as usual
 const textarea = document.querySelector('textarea');
@@ -201,7 +215,7 @@ class ExtensionBackgroundMessenger {
 
 // Initialize background component
 const messenger = new ExtensionBackgroundMessenger();
-LinguixCheckerSDK.initialize('your-api-key', messenger);
+LinguixCheckerSDK.initialize({ apiKey: 'your-api-key' }, messenger);
 ```
 
 ```javascript
@@ -233,7 +247,7 @@ class ExtensionContentMessenger {
 
 // Initialize content component
 const messenger = new ExtensionContentMessenger();
-LinguixCheckerSDK.initialize('your-api-key', messenger);
+LinguixCheckerSDK.initialize({ apiKey: 'your-api-key' }, messenger);
 
 let currentElement = null;
 document.addEventListener('focusin', (event) => {

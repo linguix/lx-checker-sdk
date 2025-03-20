@@ -6,28 +6,22 @@ This document provides a reference for the public API of the Linguix Checker SDK
 
 ### Methods
 
-#### `initialize(apiKey: string, messenger?: ILinguixMessenger): void`
+#### `initialize(config: ILinguixConfig, messenger?: ILinguixMessenger): void`
 
-Initializes the SDK with the provided API key and optional messenger.
+Initializes the SDK with the provided configuration and optional messenger.
 
 **Parameters:**
-- `apiKey` (string): Your Linguix API key
+- `config` (ILinguixConfig): Configuration object with the following properties:
+  - `apiKey` (optional string): Your Linguix API key, can be omitted if custom proxy server is used
+  - `url` (optional string): URL of your proxy server
+  - `options` (optional object):
+    - `query` (optional object): Query parameters to include in requests
+      - `clientToken` (optional string): Token for authentication with your proxy server
+  - `language` (optional string): Force the checker to use a specific language instead of automatic detection. By default, Linguix supports 30+ most popular languages with automatic detection. Manual language forcing is limited to: 'en-US', 'en-GB', 'en-ZA', 'en-CA', 'en-AU', 'en-NZ', 'pt-PT', 'pt-BR', 'de-DE', 'fr', 'pl-PL', 'es', 'it'
 - `messenger` (optional): Custom messenger implementation
   - Pass `ILinguixBackgroundMessenger` to initialize background component
   - Pass `ILinguixContentMessenger` to initialize content component
   - If not provided, initializes both components in the same context
-
-#### `initializeWithConfig(config: ILinguixSocketConfig, messenger?: ILinguixMessenger): void`
-
-Initializes the SDK with a custom configuration for connecting to a proxy server.
-
-**Parameters:**
-- `config` (ILinguixSocketConfig): Configuration object with the following properties:
-  - `url` (string): URL of your proxy server
-  - `options` (object):
-    - `query` (object): Query parameters to include in requests
-      - `clientToken` (string): Token for authentication with your proxy server
-- `messenger` (optional): Custom messenger implementation as described above
 
 #### `attachToElement(element: SupportedElement): void`
 
@@ -123,16 +117,16 @@ import { LinguixCheckerSDK } from '@textly/lx-checker-sdk/worker';
 const messenger = new YourBackgroundMessenger();
 
 // Initialize with API key
-LinguixCheckerSDK.initialize('your-api-key', messenger);
+LinguixCheckerSDK.initialize({apiKey: 'your-api-key'}, messenger);
 
 // Or with custom configuration
-LinguixCheckerSDK.initializeWithConfig({
-    url: 'http://your-proxy-server.com:3000',
-    options: {
-        query: {
-            clientToken: 'some-token'
-        }
+LinguixCheckerSDK.initialize({
+  url: 'http://your-proxy-server.com:3000',
+  options: {
+    query: {
+      clientToken: 'some-token'
     }
+  }
 }, messenger);
 ```
 
@@ -140,17 +134,15 @@ LinguixCheckerSDK.initializeWithConfig({
 
 For production applications, you may want to use a proxy server to keep your API key secure. See the [Proxy Server Guide](proxy-server.md) for implementation details.
 
-When using a proxy server, initialize the SDK with the `initializeWithConfig` method:
+When using a proxy server, initialize the SDK with the `initialize` method:
 
 ```javascript
-LinguixCheckerSDK.initializeWithConfig(
-    {
-        url: 'http://localhost:3000',
-        options: {
-            query: {
-                clientToken: 'some-token'
-            }
-        }
+LinguixCheckerSDK.initialize({
+  url: 'http://localhost:3000',
+  options: {
+    query: {
+      clientToken: 'some-token'
     }
-);
+  }
+});
 ```

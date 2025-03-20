@@ -29,7 +29,7 @@ npm install @linguix.com/lx-checker-sdk
 import { LinguixCheckerSDK } from '@linguix.com/lx-checker-sdk';
 
 // Initialize
-LinguixCheckerSDK.initialize('your-api-key');
+LinguixCheckerSDK.initialize({ apiKey: 'your-api-key' });
 
 // Attach to elements
 const textarea = document.querySelector('textarea');
@@ -51,12 +51,12 @@ import { LinguixCheckerSDK } from '@linguix.com/lx-checker-sdk';
 import { YourBackgroundMessenger } from './messenger';
 
 const messenger = new YourBackgroundMessenger();
-LinguixCheckerSDK.initialize('your-api-key', messenger);
+LinguixCheckerSDK.initialize({ apiKey: 'your-api-key' }, messenger);
 
 // Content script
 import { LinguixCheckerSDK } from '@linguix.com/lx-checker-sdk';
 import { YourContentMessenger } from './messenger';
 
 const messenger = new YourContentMessenger();
-LinguixCheckerSDK.initialize('your-api-key', messenger);
+LinguixCheckerSDK.initialize({ apiKey: 'your-api-key' }, messenger);
 ```
