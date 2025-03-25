@@ -99,7 +99,7 @@ The SDK uses WebSockets for communication with Linguix grammar checking services
 For background scripts running in service worker environments (like browser extensions' background scripts) where browser DOM APIs are not available, the SDK provides a specialized worker import:
 
 ```javascript
-import { LinguixCheckerSDK } from '@textly/lx-checker-sdk/worker';
+import { LinguixCheckerSDK } from '@linguix.com/lx-checker-sdk/worker';
 ```
 
 This is a drop-in replacement for the standard import that provides the same API but is optimized for environments without browser DOM APIs. When using this import:
@@ -111,7 +111,7 @@ This is a drop-in replacement for the standard import that provides the same API
 Example usage:
 
 ```javascript
-import { LinguixCheckerSDK } from '@textly/lx-checker-sdk/worker';
+import { LinguixCheckerSDK } from '@linguix.com/lx-checker-sdk/worker';
 
 // A messenger implementation is required in worker environments
 const messenger = new YourBackgroundMessenger();

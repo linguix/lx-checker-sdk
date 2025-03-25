@@ -2,6 +2,29 @@
 
 All notable changes to the Linguix Checker SDK will be documented in this file.
 
+## [1.0.6] - 2025-03-25
+
+### Added
+
+- **Next.js Server-Side Rendering (SSR) Compatibility**: Added support for Next.js applications with SSR
+  - Modified the SDK to gracefully handle server environments where browser APIs are not available
+  - Prevents "HTMLElement is not defined" errors during server-side rendering
+  - Maintains full functionality in browser environments
+
+### Usage in Next.js
+
+When using the SDK in Next.js applications:
+
+```javascript
+// Add 'use client' directive at the top of components that directly use the SDK
+'use client';
+
+import { LinguixCheckerSDK } from '@linguix.com/lx-checker-sdk';
+
+// Initialize as usual
+LinguixCheckerSDK.initialize({ apiKey: 'your-api-key' });
+```
+
 ## [1.0.5] - 2025-03-20
 
 ### Changed
