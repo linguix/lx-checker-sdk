@@ -18,6 +18,9 @@ Linguix Checker SDK provides grammar and spell checking functionality for web ap
 - [Getting Started](getting-started.md) - Basic setup and usage guide
 - [API Reference](api-reference.md) - Detailed method and interface reference
 - [Styling Guide](styling.md) - Customization options for UI components
+- [Next.js Integration](nextjs.md) - Guide for using the SDK with Next.js
+- [Callbacks](docs/callbacks.md) - Documentation for event callbacks
+- [Changelog](CHANGELOG.md) - Version history and updates
 
 ## Quick Start
 
@@ -30,6 +33,12 @@ import { LinguixCheckerSDK } from '@linguix.com/lx-checker-sdk';
 
 // Initialize
 LinguixCheckerSDK.initialize({ apiKey: 'your-api-key' });
+
+// Or with language forcing (when you know what language your users will use)
+LinguixCheckerSDK.initialize({ 
+  apiKey: 'your-api-key',
+  language: 'en-US'
+});
 
 // Attach to elements
 const textarea = document.querySelector('textarea');
@@ -59,4 +68,8 @@ import { YourContentMessenger } from './messenger';
 
 const messenger = new YourContentMessenger();
 LinguixCheckerSDK.initialize({ apiKey: 'your-api-key' }, messenger);
+
+// Attach to elements as usual
+const textarea = document.querySelector('textarea');
+LinguixCheckerSDK.attachToElement(textarea);
 ```
