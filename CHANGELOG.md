@@ -2,6 +2,12 @@
 
 All notable changes to the Linguix Checker SDK will be documented in this file.
 
+## [1.0.8] - 2025-04-02
+
+### Improved
+
+- **Browser Extension Support**: Enhanced compatibility and stability for browser extension environments
+
 ## [1.0.7] - 2025-04-01
 
 ### Added
