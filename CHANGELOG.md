@@ -2,6 +2,36 @@
 
 All notable changes to the Linguix Checker SDK will be documented in this file.
 
+## [1.0.7] - 2025-04-01
+
+### Added
+
+- **Event Callbacks**: Added callback support for key SDK events
+  - `onCheckResultReceived`: Triggered when check results are received, providing text statistics and alert count
+  - `onReplacementApplied`: Triggered when a user applies a replacement suggestion from the popover
+  - Callbacks can be set globally for all elements or individually per element
+  - Both global and element-specific callbacks will be called when available
+
+### Fixed
+
+- **Development Environment Compatibility**: Resolved an issue that caused infinite loading and memory consumption in certain development environments
+  - Modified internal code to ensure better compatibility with modern bundlers and development servers
+
+### API Changes
+
+- **ILinguixConfig Interface**:
+  - Added `callbacks` property to the configuration object with optional callback functions
+  - Added `ILinguixCallbacks` interface defining the callback function signatures
+  - Added `ILinguixElementConfig` interface for element-specific configuration
+
+- **LinguixCheckerSDK Class**:
+  - Updated `attachToElement` method to accept element-specific options: `attachToElement(element: SupportedElement, options?: ILinguixElementConfig): void`
+
+### Documentation
+
+- Added detailed documentation for callbacks in [callbacks.md](callbacks.md)
+- Updated examples to demonstrate both global and element-specific callback usage
+
 ## [1.0.6] - 2025-03-25
 
 ### Added

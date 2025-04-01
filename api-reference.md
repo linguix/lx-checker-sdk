@@ -18,17 +18,24 @@ Initializes the SDK with the provided configuration and optional messenger.
     - `query` (optional object): Query parameters to include in requests
       - `clientToken` (optional string): Token for authentication with your proxy server
   - `language` (optional string): Force the checker to use a specific language instead of automatic detection. By default, Linguix supports 30+ most popular languages with automatic detection. Manual language forcing is limited to: 'en-US', 'en-GB', 'en-ZA', 'en-CA', 'en-AU', 'en-NZ', 'pt-PT', 'pt-BR', 'de-DE', 'fr', 'pl-PL', 'es', 'it'
+  - `callbacks` (optional object): Event callbacks for SDK operations
+    - `onCheckResultReceived` (optional function): Called when check results are received
+    - `onReplacementApplied` (optional function): Called when a user applies a replacement
 - `messenger` (optional): Custom messenger implementation
   - Pass `ILinguixBackgroundMessenger` to initialize background component
   - Pass `ILinguixContentMessenger` to initialize content component
   - If not provided, initializes both components in the same context
 
-#### `attachToElement(element: SupportedElement): void`
+#### `attachToElement(element: SupportedElement, options?: ILinguixElementConfig): void`
 
 Attaches the checker to a textarea or contenteditable element.
 
 **Parameters:**
 - `element`: HTMLTextAreaElement or HTMLElement with contenteditable attribute
+- `options` (optional): Element-specific configuration
+  - `callbacks` (optional object): Element-specific event callbacks
+    - `onCheckResultReceived` (optional function): Called when check results are received for this element
+    - `onReplacementApplied` (optional function): Called when a user applies a replacement in this element
 
 #### `detachFromElement(element: SupportedElement): void`
 
@@ -55,6 +62,62 @@ A wrapper element that automatically initializes the grammar checker for contain
 ```
 
 ## Interfaces
+
+### ILinguixConfig
+
+```typescript
+interface ILinguixConfig {
+    url?: string;
+    apiKey?: string;
+    options?: {
+        query?: {
+            clientToken?: string;
+        };
+    };
+    language?: string;
+    callbacks?: ILinguixCallbacks;
+}
+```
+
+### ILinguixCallbacks
+
+```typescript
+interface ILinguixCallbacks {
+    onCheckResultReceived?: (result: { 
+        textStats?: ILinguixTextStats, 
+        alertsCount: number 
+    }) => void;
+    onReplacementApplied?: (data: { 
+        originalText: string,
+        replacement: string,
+        description: string
+    }) => void;
+}
+```
+
+### ILinguixElementConfig
+
+```typescript
+interface ILinguixElementConfig {
+    callbacks?: ILinguixCallbacks;
+}
+```
+
+### ILinguixTextStats
+
+```typescript
+interface ILinguixTextStats {
+    wordsCount: number;        // Total number of words in the text
+    charsCount: number;        // Total number of characters in the text
+    avgWordLength: number;     // Average word length
+    avgSentenceLength: number; // Average sentence length (in words)
+    sentencesCount: number;    // Total number of sentences
+    fleschIndex: number;       // Flesch Reading Ease score (0-100, higher is easier to read)
+    textScore: number;         // Overall text quality score
+    readingTimeSeconds: number; // Estimated reading time in seconds
+    speakingTimeSeconds: number; // Estimated speaking time in seconds
+}
+```
 
 ### ILinguixMessage
 
@@ -89,6 +152,29 @@ interface ILinguixBackgroundMessenger {
     destroy(): void;
 }
 ```
+
+## Callback Events
+
+### onCheckResultReceived
+
+Triggered when check results are received from the Linguix API.
+
+**Callback data:**
+- `textStats`: Statistics about the checked text (readability scores, word count, etc.)
+- `alertsCount`: The number of alerts (grammar/spelling issues) found in the text
+
+### onReplacementApplied
+
+Triggered when a user applies a replacement suggestion from the popover.
+
+**Callback data:**
+- `originalText`: The original text that was replaced
+- `replacement`: The replacement text that was applied
+- `description`: The description of the error as shown in the alert popover
+
+## See Also
+
+For more detailed information on using callbacks, see the [Callbacks Documentation](callbacks.md).
 
 ## Transport Layer
 
