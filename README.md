@@ -19,7 +19,7 @@ Linguix Checker SDK provides grammar and spell checking functionality for web ap
 - [API Reference](api-reference.md) - Detailed method and interface reference
 - [Styling Guide](styling.md) - Customization options for UI components
 - [Next.js Integration](nextjs.md) - Guide for using the SDK with Next.js
-- [Callbacks](docs/callbacks.md) - Documentation for event callbacks
+- [Callbacks](callbacks.md) - Documentation for event callbacks
 - [Changelog](CHANGELOG.md) - Version history and updates
 
 ## Quick Start
