@@ -256,7 +256,7 @@ See above for best practice placement.
 </script>
 ```
 
-### 5. Using <linguix-checkable> (No JS Needed)
+### 5. Using linguix-checkable custom element (No JS Needed)
 
 You can use the custom element directly for automatic initialization:
 
