@@ -2,6 +2,27 @@
 
 All notable changes to the Linguix Checker SDK will be documented in this file.
 
+## [1.0.9] - 2025-04-18
+
+### Added
+
+- **Status Bar Component**
+  - Introduced the new status bar (`LinguixBarElement`) component, which provides a compact summary of text checking status and alert count. The status bar can be integrated into any supported element and responds to real-time checking events.
+  - The status bar supports advanced customization via CSS variables. Users can adjust spinner size, badge (count) size, font size, padding, gap, border radius, and colors using CSS custom properties (e.g., `--lx-bar-spinner-size`, `--lx-bar-count-size`, `--lx-bar-font-size`, etc.).
+
+- **Browser/CDN Usage**
+  - UMD bundle (`dist/bundle.min.js`) now includes all dependencies, making it fully self-contained for browser use via CDN. No external scripts required.
+  - SDK is now exposed as `window.Linguix` in browser environments. All named exports (including `LinguixCheckerSDK`) are available as properties of this global object.
+
+### Fixed
+
+- **Custom Elements Double Registration**: Fixed an error when calling `LinguixCheckerSDK.destroy()` followed by `initialize()` multiple times on the same page. The SDK now checks if custom elements are already registered before attempting to define them again, preventing `NotSupportedError: the name "..." has already been used with this registry`.
+
+### API Changes
+
+- **ILinguixConfig Interface**:
+  - Added a new `features` property to the configuration object. This allows enabling or disabling the status bar (`bar`) feature via `features.bar` (e.g., `{ features: { bar: false } }`).
+
 ## [1.0.8] - 2025-04-02
 
 ### Improved

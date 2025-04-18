@@ -1,8 +1,13 @@
 # Linguix Checker SDK Documentation
 
+[![npm version](https://img.shields.io/npm/v/@linguix.com/lx-checker-sdk.svg)](https://www.npmjs.com/package/@linguix.com/lx-checker-sdk)
+[![jsdelivr](https://data.jsdelivr.com/v1/package/npm/@linguix.com/lx-checker-sdk/badge)](https://www.jsdelivr.com/package/npm/@linguix.com/lx-checker-sdk)
+
 ## Overview
 
 Linguix Checker SDK provides grammar and spell checking functionality for web applications and browser extensions. The SDK can check text in textareas and contenteditable elements, highlighting errors and offering suggestions for correction.
+
+![Linguix Checker SDK](img/linguix.png)
 
 ## Features
 
@@ -23,6 +28,8 @@ Linguix Checker SDK provides grammar and spell checking functionality for web ap
 - [Changelog](CHANGELOG.md) - Version history and updates
 
 ## Quick Start
+
+### Using with npm (Node.js/Modern Frontend)
 
 ```javascript
 // Install
@@ -50,6 +57,25 @@ LinguixCheckerSDK.attachToElement(textarea);
 </linguix-checkable>
 ```
 
+### Using Without npm (CDN/Script Tag, Server Templates)
+
+You can use the Linguix Checker SDK in any environment that renders HTML, including PHP (Laravel Blade), Python (Jinja), or static HTML, by loading the SDK from a CDN and initializing it in a script tag.
+
+> **Best Practice:** Place the `<script src="..."></script>` and the initialization code at the **end of your HTML body** (just before `</body>`). This ensures the DOM is loaded and improves page load performance.
+
+```html
+<!-- Place these just before </body> -->
+<script src="https://cdn.jsdelivr.net/npm/@linguix.com/lx-checker-sdk/dist/bundle.min.js"></script>
+<script>
+  window.Linguix.LinguixCheckerSDK.initialize({ apiKey: 'your-api-key' });
+  window.Linguix.LinguixCheckerSDK.attachToElement(document.querySelector('textarea'));
+</script>
+```
+
+This will expose the SDK as `window.Linguix` for use in your scripts.
+
+For more advanced usage, integration with frameworks, and additional examples, see [Getting Started](getting-started.md).
+
 ## Advanced Usage
 
 The SDK supports a split architecture where UI and networking components run in separate contexts, ideal for browser extensions:
@@ -72,4 +98,3 @@ LinguixCheckerSDK.initialize({ apiKey: 'your-api-key' }, messenger);
 // Attach to elements as usual
 const textarea = document.querySelector('textarea');
 LinguixCheckerSDK.attachToElement(textarea);
-```

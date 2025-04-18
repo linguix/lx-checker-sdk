@@ -2,6 +2,33 @@
 
 This document provides a reference for the public API of the Linguix Checker SDK.
 
+## Table of Contents
+
+- [LinguixCheckerSDK](#linguixcheckersdk)
+  - [Methods](#methods)
+    - [initialize](#initializeconfig-ilinguixconfig-messenger-ilinguixmessenger-void)
+    - [attachToElement](#attachtoelemententity-supportedelement-options-ilinguixelementconfig-void)
+    - [detachFromElement](#detachfromelemententity-supportedelement-void)
+    - [destroy](#destroy-void)
+- [Custom Elements](#custom-elements)
+  - [linguix-checkable](#linguix-checkable)
+- [Interfaces](#interfaces)
+  - [ILinguixConfig](#ilinguixconfig)
+  - [ILinguixCallbacks](#ilinguixcallbacks)
+  - [ILinguixElementConfig](#ilinguixelementconfig)
+  - [ILinguixTextStats](#ilinguixtextstats)
+  - [ILinguixMessage](#ilinguixmessage)
+  - [ILinguixContentMessenger](#ilinguixcontentmessenger)
+  - [ILinguixBackgroundMessenger](#ilinguixbackgroundmessenger)
+- [Callback Events](#callback-events)
+  - [onCheckResultReceived](#oncheckreceived)
+  - [onReplacementApplied](#onreplacementapplied)
+- [UI Components](#ui-components)
+  - [Status Bar](#status-bar)
+- [Transport Layer](#transport-layer)
+- [Service Worker Support](#service-worker-support)
+- [Proxy Server](#proxy-server)
+
 ## LinguixCheckerSDK
 
 ### Methods
@@ -21,6 +48,8 @@ Initializes the SDK with the provided configuration and optional messenger.
   - `callbacks` (optional object): Event callbacks for SDK operations
     - `onCheckResultReceived` (optional function): Called when check results are received
     - `onReplacementApplied` (optional function): Called when a user applies a replacement
+  - `features` (optional object): Feature flags
+    - `bar` (optional boolean): Enable or disable the status bar element
 - `messenger` (optional): Custom messenger implementation
   - Pass `ILinguixBackgroundMessenger` to initialize background component
   - Pass `ILinguixContentMessenger` to initialize content component
@@ -76,6 +105,9 @@ interface ILinguixConfig {
     };
     language?: string;
     callbacks?: ILinguixCallbacks;
+    features?: {
+        bar?: boolean;
+    };
 }
 ```
 
@@ -171,6 +203,35 @@ Triggered when a user applies a replacement suggestion from the popover.
 - `originalText`: The original text that was replaced
 - `replacement`: The replacement text that was applied
 - `description`: The description of the error as shown in the alert popover
+
+## UI Components
+
+The SDK provides several UI components that are automatically attached to the input fields:
+
+### Status Bar
+
+A status indicator that appears in the bottom-right corner of the input field, showing the current state of the grammar checking process.
+
+![Linguix Bar Element](img/linguix-bar.png)
+
+The status bar displays:
+- A loading spinner when text is being checked (purple when initial, red for errors, green for no errors)
+- A count of grammar/spelling issues found (red badge with number)
+- A checkmark when no issues are found (green badge with checkmark)
+
+**Styling Options**: The status bar appearance can be fully customized using CSS variables. See the [Status Bar Styling](styling.md#status-bar-styling) section in the styling guide for complete customization options.
+
+**Configuration:**
+
+You can disable the status bar entirely:
+```javascript
+LinguixCheckerSDK.initialize({
+  apiKey: 'your-api-key',
+  features: {
+    bar: false // Disables the status bar
+  }
+});
+```
 
 ## See Also
 

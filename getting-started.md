@@ -1,13 +1,45 @@
 # Linguix Checker SDK
 
-The Linguix Checker SDK enables grammar and spell checking integration for web applications and browser extensions.
-For styling options, see the [Styling Guide](styling.md).
+## Table of Contents
+
+- [Installation](#installation)
+- [Basic Usage](#basic-usage)
+  - [Initializing the SDK](#initializing-the-sdk)
+  - [Connecting Elements](#connecting-elements)
+    - [JavaScript API](#option-1-javascript-api)
+    - [HTML Wrapper](#option-2-html-wrapper)
+- [Cleanup](#cleanup)
+- [Advanced: Split Architecture](#advanced-split-architecture)
+- [Custom Elements Support](#custom-elements-support)
+- [Usage Without npm/Node.js (CDN/Script Tag)](#usage-without-npmnodejs-cdnscript-tag)
+- [Browser Extension Example](#browser-extension-example)
 
 ## Installation
+
+You can use the Linguix Checker SDK in two ways:
+
+### 1. Using npm (Recommended for modern web apps)
 
 ```bash
 npm install @linguix.com/lx-checker-sdk
 ```
+
+### 2. Using CDN/Script Tag (For any HTML, PHP/Laravel, Jinja, or static site)
+
+> **Best Practice:** Place the `<script src="..."></script>` and the initialization code at the **end of your HTML body** (just before `</body>`). This ensures the DOM is loaded and improves page load performance.
+
+Add this to your HTML or template:
+
+```html
+<!-- Place these just before </body> -->
+<script src="https://cdn.jsdelivr.net/npm/@linguix.com/lx-checker-sdk/dist/bundle.min.js"></script>
+<script>
+  window.Linguix.LinguixCheckerSDK.initialize({ apiKey: 'your-api-key' });
+  window.Linguix.LinguixCheckerSDK.attachToElement(document.querySelector('textarea'));
+</script>
+```
+
+This will expose the SDK as `window.Linguix` for use in your scripts.
 
 ## Basic Usage
 
@@ -174,6 +206,69 @@ If you need to manually initialize the polyfill earlier, you can import it direc
 ```javascript
 import '@webcomponents/custom-elements';
 ```
+
+## Usage Without npm/Node.js (CDN/Script Tag)
+
+You can use the Linguix Checker SDK in any server-rendered environment (PHP, Laravel Blade, Python Jinja, etc.) or static HTML by loading it from a CDN.
+
+### 1. Add the SDK via CDN
+
+> **Best Practice:** Place the `<script src="..."></script>` and the initialization code at the **end of your HTML body** (just before `</body>`).
+
+```html
+<!-- Place these just before </body> -->
+<script src="https://cdn.jsdelivr.net/npm/@linguix.com/lx-checker-sdk/dist/bundle.min.js"></script>
+<script>
+  window.Linguix.LinguixCheckerSDK.initialize({ apiKey: 'your-api-key' });
+  window.Linguix.LinguixCheckerSDK.attachToElement(document.querySelector('textarea'));
+</script>
+```
+
+This will expose the SDK as `window.Linguix` for use in your scripts.
+
+### 2. Initialize in a Script Tag
+
+See above for best practice placement.
+
+### 3. Example: Laravel Blade
+
+```blade
+<!-- resources/views/example.blade.php -->
+<textarea></textarea>
+<!-- Place these just before </body> -->
+<script src="https://cdn.jsdelivr.net/npm/@linguix.com/lx-checker-sdk/dist/bundle.min.js"></script>
+<script>
+  window.Linguix.LinguixCheckerSDK.initialize({ apiKey: 'your-api-key' });
+  window.Linguix.LinguixCheckerSDK.attachToElement(document.querySelector('textarea'));
+</script>
+```
+
+### 4. Example: Jinja Template
+
+```jinja
+<!-- templates/example.html -->
+<textarea></textarea>
+<!-- Place these just before </body> -->
+<script src="https://cdn.jsdelivr.net/npm/@linguix.com/lx-checker-sdk/dist/bundle.min.js"></script>
+<script>
+  window.Linguix.LinguixCheckerSDK.initialize({ apiKey: 'your-api-key' });
+  window.Linguix.LinguixCheckerSDK.attachToElement(document.querySelector('textarea'));
+</script>
+```
+
+### 5. Using <linguix-checkable> (No JS Needed)
+
+You can use the custom element directly for automatic initialization:
+
+```html
+<linguix-checkable>
+  <textarea></textarea>
+</linguix-checkable>
+<!-- Place this just before </body> -->
+<script src="https://cdn.jsdelivr.net/npm/@linguix.com/lx-checker-sdk/dist/bundle.min.js"></script>
+```
+
+> **Security Note:** The API key will be visible in the page source. For production, consider using a proxy server to keep your API key secure. See the [Proxy Server Guide](proxy-server.md) for details.
 
 ## Browser Extension Example
 

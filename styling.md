@@ -40,6 +40,14 @@ Free users will see:
     - [Subtle Style](#subtle-style)
   - [Z-Index Management](#z-index-management)
   - [Best Practices](#best-practices)
+- [Status Bar Styling](#status-bar-styling)
+  - [Available CSS Variables](#status-bar-css-variables)
+  - [Usage Examples](#status-bar-examples)
+    - [Basic Styling](#status-bar-basic-styling)
+    - [Custom Colors](#status-bar-custom-colors)
+    - [Minimal Style](#status-bar-minimal-style)
+    - [Custom Sizes](#status-bar-custom-sizes)
+    - [Compact Style](#status-bar-compact-style)
 
 ## Alert Popover Styling
 
@@ -715,3 +723,100 @@ Example of z-index customization:
    - Start with lower z-index values and increment as needed
    - Consider the stacking context of your application
    - Use consistent z-index ranges for similar components
+
+## Status Bar Styling
+
+The Linguix Status Bar component shows the current state of grammar checking and error count. It can be customized using CSS Custom Properties (CSS variables) to match your application's design.
+
+> **Important**: As with other styling customization options, status bar styling is available **only** for users with a paid API subscription plan. Free users will see the default Linguix styling which cannot be modified without an active subscription.
+
+
+### Available CSS Variables
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `--lx-bar-spinner-background` | `#8155FD` | Background color of the spinner in its default state |
+| `--lx-bar-spinner-error-background` | `#F04438` | Background color of the spinner when errors are found |
+| `--lx-bar-spinner-success-background` | `#12B76A` | Background color of the spinner when no errors are found |
+| `--lx-bar-count-error-background` | `#F04438` | Background color of the count badge when showing errors |
+| `--lx-bar-count-success-background` | `#12B76A` | Background color of the count badge when showing success |
+| `--lx-bar-text-color` | `#FFFFFF` | Text color for the count badge |
+| `--lx-bar-z-index` | `2147483646` | Z-index for the status bar |
+| `--lx-bar-border-radius` | `100px` | Border radius for the spinner and count badge |
+| `--lx-bar-spinner-size` | `20px` | Width and height of the spinner element |
+| `--lx-bar-count-size` | `20px` | Width and height of the count badge |
+| `--lx-bar-font-size` | `12px` | Font size for the count text |
+| `--lx-bar-font-weight` | `600` | Font weight for the count text |
+| `--lx-bar-padding` | `6px` | Padding inside the wrapper element |
+| `--lx-bar-gap` | `6px` | Gap between spinner and count badge |
+
+### Usage Examples
+
+#### Basic Styling
+
+```css
+linguix-bar {
+    --lx-bar-spinner-background: #6366f1;
+    --lx-bar-spinner-error-background: #ef4444;
+    --lx-bar-spinner-success-background: #22c55e;
+    --lx-bar-count-error-background: #ef4444;
+    --lx-bar-count-success-background: #22c55e;
+    --lx-bar-text-color: #ffffff;
+}
+```
+
+#### Custom Colors
+
+```css
+/* Matching your brand colors */
+linguix-bar {
+    --lx-bar-spinner-background: #3b82f6;
+    --lx-bar-spinner-error-background: #f97316;
+    --lx-bar-spinner-success-background: #10b981;
+    --lx-bar-count-error-background: #f97316;
+    --lx-bar-count-success-background: #10b981;
+    --lx-bar-border-radius: 8px;
+}
+```
+
+#### Custom Sizes
+
+```css
+/* Larger elements */
+linguix-bar {
+    --lx-bar-spinner-size: 24px;
+    --lx-bar-count-size: 24px;
+    --lx-bar-font-size: 14px;
+    --lx-bar-padding: 8px;
+    --lx-bar-gap: 8px;
+}
+```
+
+#### Compact Style
+
+```css
+/* Smaller, more compact elements */
+linguix-bar {
+    --lx-bar-spinner-size: 16px;
+    --lx-bar-count-size: 16px;
+    --lx-bar-font-size: 10px;
+    --lx-bar-font-weight: 500;
+    --lx-bar-padding: 4px;
+    --lx-bar-gap: 4px;
+    --lx-bar-border-radius: 4px;
+}
+```
+
+#### Minimal Style
+
+```css
+/* Subtle, minimalist style */
+linguix-bar {
+    --lx-bar-spinner-background: rgba(0, 0, 0, 0.2);
+    --lx-bar-spinner-error-background: rgba(239, 68, 68, 0.7);
+    --lx-bar-spinner-success-background: rgba(34, 197, 94, 0.7);
+    --lx-bar-count-error-background: rgba(239, 68, 68, 0.7);
+    --lx-bar-count-success-background: rgba(34, 197, 94, 0.7);
+    --lx-bar-text-color: rgba(255, 255, 255, 0.9);
+    --lx-bar-border-radius: 4px;
+}
