@@ -2,6 +2,25 @@
 
 All notable changes to the Linguix Checker SDK will be documented in this file.
 
+## [1.0.10] - 2025-04-23
+
+### Improved
+
+- **Performance Optimizations**
+  - Enhanced scroll performance for error highlights and status bar
+  - Eliminated visual glitches during rapid scrolling
+  - Improved overall UI responsiveness and smoothness
+
+### Fixed
+
+- **Alert Positioning**
+  - Fixed issue where alerts would be incorrectly displaced during manual text editing
+  - Implemented intelligent alert position recalculation that maintains proper alert positions after edits
+  - Improved handling of replacement edits to ensure alerts are correctly positioned after text replacements
+
+- **Status Bar**
+  - Fixed spinner animation in status bar to prevent it from getting stuck
+
 ## [1.0.9] - 2025-04-18
 
 ### Added
