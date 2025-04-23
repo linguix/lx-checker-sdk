@@ -2,6 +2,14 @@
 
 All notable changes to the Linguix Checker SDK will be documented in this file.
 
+## [1.0.11] - 2025-04-23
+
+### Fixed
+
+- **CDN Availability**
+  - Fixed UMD bundle (`dist/bundle.min.js`) availability via jsDelivr by including it in the published npm package
+  - The UMD bundle can now be accessed directly via `https://cdn.jsdelivr.net/npm/@linguix.com/lx-checker-sdk@1.0.11/dist/bundle.min.js`
+
 ## [1.0.10] - 2025-04-23
 
 ### Improved
