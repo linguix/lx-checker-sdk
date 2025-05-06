@@ -3,7 +3,7 @@
 [![npm version](https://img.shields.io/npm/v/@linguix.com/lx-checker-sdk.svg)](https://www.npmjs.com/package/@linguix.com/lx-checker-sdk)
 [![jsdelivr](https://data.jsdelivr.com/v1/package/npm/@linguix.com/lx-checker-sdk/badge)](https://www.jsdelivr.com/package/npm/@linguix.com/lx-checker-sdk)
 
-[<img src="https://run.pstmn.io/button.svg" alt="Run In Postman" style="width: 128px; height: 32px;">](https://god.gw.postman.com/run-collection/43914404-a2eee3b5-6e1f-4c3d-9f74-a9e218290e3c?action=collection%2Ffork&source=rip_markdown&collection-url=entityId%3D43914404-a2eee3b5-6e1f-4c3d-9f74-a9e218290e3c%26entityType%3Dcollection%26workspaceId%3D75c465e6-5a57-4c74-ae2f-1866d870acd5)
+[<img src="https://run.pstmn.io/button.svg" alt="Run In Postman" style="width: 128px; height: 32px;"></img>](https://god.gw.postman.com/run-collection/43914404-a2eee3b5-6e1f-4c3d-9f74-a9e218290e3c?action=collection%2Ffork&source=rip_markdown&collection-url=entityId%3D43914404-a2eee3b5-6e1f-4c3d-9f74-a9e218290e3c%26entityType%3Dcollection%26workspaceId%3D75c465e6-5a57-4c74-ae2f-1866d870acd5)
 
 ## Overview
 
